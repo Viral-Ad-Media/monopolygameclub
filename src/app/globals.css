@@ -1,0 +1,58 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@theme {
+  --color-board: #cfe5d2;
+  --color-cream: #fbf7ee;
+  --color-paper: #ffffff;
+  --color-ink: #1c1917;
+  --color-muted: #57534e;
+  --color-line: #e7e0d0;
+  --color-brand: #d4001a;
+  --color-brand-dark: #a30014;
+  --color-gold: #f5c518;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-archivo), ui-sans-serif, system-ui, sans-serif;
+}
+
+html {
+  color-scheme: light;
+}
+
+body {
+  background: var(--color-cream);
+  color: var(--color-ink);
+}
+
+/* Article typography */
+.prose-game {
+  --tw-prose-body: var(--color-ink);
+  --tw-prose-headings: var(--color-ink);
+  --tw-prose-links: var(--color-brand-dark);
+  --tw-prose-bold: var(--color-ink);
+  --tw-prose-bullets: var(--color-brand);
+  --tw-prose-counters: var(--color-brand);
+  --tw-prose-th-borders: var(--color-line);
+  --tw-prose-td-borders: var(--color-line);
+}
+.prose-game h2,
+.prose-game h3 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  scroll-margin-top: 6rem;
+}
+.prose-game table {
+  display: block;
+  overflow-x: auto;
+}
+.prose-game thead {
+  background: var(--color-ink);
+}
+.prose-game thead th {
+  color: white;
+  padding: 0.6rem 0.75rem;
+}
+.prose-game img {
+  border-radius: 0.75rem;
+}
