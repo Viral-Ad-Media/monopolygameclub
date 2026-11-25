@@ -3,6 +3,7 @@
  *
  *   npm run db:seed              # add anything missing, keep edits made in the admin
  *   npm run db:seed -- --overwrite  # reset seeded items to the files' content
+ *   tsx scripts/seed.ts --if-empty  # only seed a database with no game sections (used by vercel-build)
  */
 import fs from "node:fs";
 import path from "node:path";
@@ -11,6 +12,7 @@ import { sql } from "drizzle-orm";
 import { closeDb, db, schema } from "./db";
 
 const overwrite = process.argv.includes("--overwrite");
+const ifEmpty = process.argv.includes("--if-empty");
 const root = path.join(process.cwd(), "src", "content");
 
 function read(dir: string) {
@@ -21,6 +23,13 @@ function read(dir: string) {
 }
 
 async function main() {
+  if (ifEmpty) {
+    const [existing] = await db.select({ id: schema.category.id }).from(schema.category).limit(1);
+    if (existing) {
+      console.log("Database already has content; skipping seed.");
+      return;
+    }
+  }
   const categories = read("categories");
   for (const { data, content } of categories) {
     const values = {

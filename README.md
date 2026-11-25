@@ -35,8 +35,8 @@ npm run dev
 
 ## Deploying (Vercel)
 
-1. Import the repo, set `DATABASE_URL`, `BETTER_AUTH_SECRET` (`openssl rand -base64 32`), `BETTER_AUTH_URL` and `NEXT_PUBLIC_SITE_URL` to the production URL.
-2. Run `npm run db:migrate` and `npm run db:seed` against the Neon database once before the first build, because pages are prerendered from the database.
+1. Import the repo and connect a Neon database (the Vercel Neon integration sets `DATABASE_URL` and `DATABASE_URL_UNPOOLED`). Set `BETTER_AUTH_SECRET` (`openssl rand -base64 32`), `BETTER_AUTH_URL` and `NEXT_PUBLIC_SITE_URL` to the production URL.
+2. Vercel runs `npm run vercel-build`, which applies pending migrations, seeds the content only if the database has no game sections yet, then runs `next build`. Pages are prerendered from the database, so migrations must run first.
 
 ## Notes
 

@@ -10,6 +10,9 @@ import { formatDate, site } from "@/lib/site";
 
 export async function generateStaticParams() {
   const slugs = await getAllSlugs();
+  // Cache Components requires at least one param. With an empty database,
+  // prerender a slug that resolves to the 404 page; real slugs render on demand.
+  if (slugs.length === 0) return [{ slug: "__empty" }];
   return slugs.map((s) => ({ slug: s.slug }));
 }
 
